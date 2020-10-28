@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Category</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for Loding -->
+    <link href="/stylesheets/style.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <!-- cdn for JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashbordServlet">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Store Management</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Product Management Collapse Menu -->
+            <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+                    aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Product Management</span>
+                </a>
+                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Product Management:</h6>
+                        <a class="collapse-item" href="/categories">Category</a>
+                        <a class="collapse-item" href="/subCategories">SubCategory</a>
+                        <a class="collapse-item" href="/units">Unit</a>
+                        <a class="collapse-item" href="/manufacturers">Manufacturer</a>
+                        <a class="collapse-item active" href="/products">Product</a>
+                    </div>
+                </div>
+            </li>
+
+
+
+           
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+
+                                    <!-- Cho show ten current Account -->
+
+                                </span>
+                                <img class="img-profile rounded-circle"
+                                    src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="employeeServlet?action=detail">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Edit Profile
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <h1 class="h3 mb-4 text-gray-800">Cho show note</h1>
+
+
+                    <!-- Page Heading -->
+                    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>-->
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+
+                            <h6 class="m-0 font-weight-bold text-primary">PRODUCT LIST</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <button style="width:200px;margin-bottom: 10px ;"
+                                    class="btn btn-primary btnCreate">Insert Product</button>
+
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Product ID</th>
+                                            <th>Product Name</th>
+                                            <th>Category</th>
+                                            <th>Manufacturer</th>
+                                            <th>Modified Date</th>
+                                            <th style="width: auto">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Cate ID</th>
+                                            <th>Cate Name</th>
+                                            <th>Category</th>
+                                            <th>Manufacturer</th>
+                                            <th>Modified Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <% for (let i = 0; i < product.length; i++){%>
+                                        <tr>
+                                            <td><%=product[i]._id%></td>
+                                            <td><%=product[i].name%></td>
+                                            <td><%=product[i].categoryID.name%></td>
+                                            <td><%=product[i].manufacturerID.name%></td>
+                                            <td><%=moment(product[i].createdAt).format("YYYY-MM-DD HH:mm")%></td>
+                                            <td>
+
+                                                <button class="btn btn-danger btnDelete"
+                                                    value="<%=product[i]._id%>">Delete</a>
+                                                    <button class="btn btn-success btnEdit"
+                                                        value="<%=product[i]._id%>">Update</a>
+
+                                            </td>
+                                        </tr>
+                                        <%}%>
+                                        
+                                    </tbody>
+                                </table>
+
+                                <script>      
+
+                                    // $('#editModal').on('shown.bs.modal', function (e) {
+                                    //     $.ajax({
+                                    //         url: '/api/subCategories/5f79c3b118b2a661144965df',
+                                    //         type: 'GET'
+                                    //     }).then((result) => {
+                                    //         console.log("data " + result);
+
+                                    //     });
+                                    // })
+
+
+
+                                    // $(document).ready(function () {
+                                    //     $.ajax({
+                                    //         url: '/api/subCategories',
+                                    //         type: 'GET'
+                                    //     }).then((result) => {
+
+                                    //         if (result.data.length > 0) {
+                                    //             $('.odd').remove();
+                                    //         }
+                                    //         var element = '';
+                                    //         for (let i = 0; i < result.data.length; i++) {
+
+                                    //             var d = new Date(result.data[i].createdAt);
+
+                                    //             element = element + `<tr>
+                                    //                 <td>${result.data[i]._id}</td>
+                                    //                 <td>${result.data[i].name}</td>
+                                    //                 <td>${result.data[i].owner.name}</td>
+                                    //                 <td>${d.toLocaleDateString("en-US")}</td>
+                                    //                 <td>${d.toLocaleDateString("en-US")}</td>
+                                    //             </tr>`;
+                                    //         }
+                                    //         console.log(element);
+                                    //         $('#dataTable').find('tbody:last').append(element);
+                                    //     })
+                                    // });
+                                </script>
+
+                                <!-- xoa phan tu product -->
+                                <script type="text/javascript">
+
+                                    // script ve Delete
+                                    $('.btnDelete').click(function () {
+
+                                        var result = confirm("If click ok will delete Product!!");
+                                        if (result) {
+                                            var id = $(this).prop('value');
+                                            $("#loading").show();
+
+                                            $.ajax({
+                                                url: `api/products/${id}`,
+                                                type: 'DELETE'
+                                            }).then((result) => {
+
+                                                //alert(`Xoa san pham thanh cong`);
+                                                $("#loading").hide();
+                                                $('#messageAlert').text("Delete Success!!")
+                                                $('#alertModal').modal('toggle');
+                                                $('.btnCloseAlert').click(function () {
+                                                    $('#alertModal').modal('hide');
+                                                });
+                                                $('#alertModal').on('hidden.bs.modal', function (e) {
+                                                    // do something...
+                                                    $("#loading").show();
+                                                    location.reload();
+                                                })
+
+
+                                            }).catch((error) => {
+                                                //alert(`Xoa san pham thanh cong`);
+                                                $("#loading").hide();
+                                                $('#messageAlert').text(`Delete Falled!!`)
+                                                $('#alertModal').modal('toggle');
+                                                $('.btnCloseAlert').click(function () {
+                                                    $('#alertModal').modal('hide');
+                                                });
+                                                $('#alertModal').on('hidden.bs.modal', function (e) {
+                                                    // do something...
+                                                    //location.reload();
+                                                })
+                                            })
+
+
+                                        } else {
+                                            return false;
+                                        }
+                                        return true;
+                                    });
+
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>HTKK Store</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="logoutServlet?action=logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Modal -->
+    <div class="modal" id="alertModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="btnCloseAlert"  >×</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="messageAlert"></div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" class="btnCloseAlert" type="button" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade"  id="editModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">EDIT PRODUCT</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="btnCloseAlert"  >×</span>
+                    </button>
+                </div>
+                <div class="modal-body" class="user">
+                    <form action="" name="editForm">
+                        
+                        <input type="hidden" name="productID" id="productID"/>
+
+                        <div class="form-group">
+                            <label for="_productName" style="font-weight: bold;">Name:</label>
+                            <input type="text" id="productName" name="productName" class="form-control"
+                                placeholder="Enter Name Product...">
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="productOriginalPrice" style="font-weight: bold;">Original Price:</label>
+                            <input type="text" id="productOriginalPrice" name="productOriginalPrice" class="form-control"
+                                placeholder="Enter Original Price Product ...">
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="productSellingPrice" style="font-weight: bold;">Selling Price:</label>
+                            <input type="text" id="productSellingPrice" name="productSellingPrice" class="form-control"
+                                placeholder="Enter Selling Price Product ...">
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="productDescription" style="font-weight: bold;">Description:</label>
+                            <input type="text" id="productDescription" name="productDescription" class="form-control"
+                                placeholder="Enter Description Product ...">
+                        </div>
+                
+                        <div class="form-group">
+                
+                            <label for="categoryID" style="font-weight: bold;">Category:</label>
+                            <select required="true" id="categoryID" name="categoryID" class="form-control">
+                                <option></option>
+                                <%  for (let i = 0; i < category.length; i++) {%>
+                                        <option id="<%=category[i]._id%>" value="<%=category[i]._id%>">
+                                            <%=category[i].name%></option>
+                                        <%}%>
+                            </select>
+                        </div>
+                
+                        <div class="form-group">
+                
+                            <label for="subCategoryID" style="font-weight: bold;">SubCategory:</label>
+                            <select required="true" id="subCategoryID" name="subCategoryID" class="form-control">
+                                <option></option>
+                                
+                            </select>
+                        </div>
+                
+                        <div class="form-group">
+                
+                            <label for="unitID" style="font-weight: bold;">Unit:</label>
+                            <select required="true" id="unitID" name="unitID" class="form-control">
+                                <option></option>
+                                <%  for (let i = 0; i < unit.length; i++) {%>
+                                        <option id="<%=unit[i]._id%>" value="<%=unit[i]._id%>"><%=unit[i].name%>
+                                        </option>
+                                        <%}%>
+                            </select>
+                        </div>
+                
+                        <div class="form-group">
+                
+                            <label for="manufacturerID" style="font-weight: bold;">Manufacturer:</label>
+                            <select required="true" id="manufacturerID" name="manufacturerID" class="form-control">
+                                <option id="0"></option>
+                                <%  for (let i = 0; i < manufacturer.length; i++) {%>
+                                        <option id="<%=manufacturer[i]._id%>" value="<%=manufacturer[i]._id%>">
+                                            <%=manufacturer[i].name%>
+                                        </option>
+                                        <%}%>
+                            </select>
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="madeIn" style="font-weight: bold;">Name:</label>
+                            <input type="text" id="madeIn" name="madeIn" class="form-control"
+                                placeholder="Enter Made In...">
+                        </div>
+                
+                        <div class="form-group">
+                
+                            <label for="isActive" style="font-weight: bold;">isActive:</label>
+                            <select required="true" id="isActive" name="isActive" class="form-control">
+                                <option id="true" value="true">true</option>
+                                <option id="false" value="false">false</option>
+                            </select>
+                        </div>
+                
+                
+                        <script>
+                            $(document).ready(function () {
+
+                                function getSubCategory(id) {
+                                    return (
+                                        $.ajax({
+                                            url: `api/categories/${id}/subCategories`,
+                                            type: "GET"
+                                        })
+                                    );
+                                }
+
+                                $('#categoryID').change(function () {
+
+                                    $('#subCategoryID').html('');
+                                    var id = $('#categoryID').val();
+
+                                    if (id == 0) {
+                                        console.log(id)
+                                        return false
+                                    };
+
+                                    $("#loading").show();
+                                    $.when(getSubCategory(id)).done(function (result) {
+                                        console.log(result);
+
+                                        for (let i = 0; i < result.data.length; i++) {
+                                            $('#subCategoryID').append($('<option>',
+                                                {
+                                                    id: result.data[i]._id,
+                                                    value: result.data[i]._id,
+                                                    text: result.data[i].name
+                                                }));
+
+                                        }
+                                        $("#loading").hide();
+                                    });
+                                })
+
+                            })
+                        </script>
+                
+                
+                        <div class="form-group">
+                            <img src="" id="thumbnil" width="300dx" height="200px" />
+                        </div>
+                
+                        <div class="form-group">
+                            <input type="file" id="file" onchange="showMyImage(this)" class="form-control form-control-file"
+                                name="image" />
+                        </div>
+                
+                        <script>
+                            function showMyImage(fileInput) {
+                                var files = fileInput.files;
+                                for (var i = 0; i < files.length; i++) {
+                                    var file = files[i];
+                                    var imageType = /image.*/;
+                                    if (!file.type.match(imageType)) {
+                                        continue;
+                                    }
+                                    var img = document.getElementById("thumbnil");
+                                    img.file = file;
+                                    var reader = new FileReader();
+                                    reader.onload = (function (aImg) {
+                                        return function (e) {
+                                            aImg.src = e.target.result;
+                                        };
+                                    })(img);
+                                    reader.readAsDataURL(file);
+                                }
+                            }
+                        </script>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary btn-user btn-block" id="btnUpdate">Insert</button>
+                 </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+
+    <!-- Create new Product -->
+    <div class="modal fade"  id="createModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">CREATE CATEGORY</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="btnCloseAlert"  >×</span>
+                    </button>
+                </div>
+                <div class="modal-body" class="user">
+                    <form action="" id="createForm" name="createForm">
+                        
+                        <div class="form-group">
+                            <label for="_productName" style="font-weight: bold;">Name:</label>
+                            <input type="text" id="_productName" name="_productName" class="form-control"
+                                placeholder="Enter Name Product..." required="true">
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="_productOriginalPrice" style="font-weight: bold;">Original Price:</label>
+                            <input type="number" id="_productOriginalPrice" name="_productOriginalPrice" class="form-control"
+                                placeholder="Enter Original Price Product ..." required="true">
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="_productSellingPrice" style="font-weight: bold;">Selling Price:</label>
+                            <input type="number" id="_productSellingPrice" name="_productSellingPrice" class="form-control"
+                                placeholder="Enter Selling Price Product ..." required="true">
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="_productDescription" style="font-weight: bold;">Description:</label>
+                            <input type="text" id="_productDescription" name="_productDescription" class="form-control"
+                                placeholder="Enter Description Product ..." required="true">
+                        </div>
+                
+                        <div class="form-group">
+                
+                            <label for="_categoryID" style="font-weight: bold;">Category:</label>
+                            <select required="true" id="_categoryID" name="_categoryID" class="form-control">
+                                <option></option>
+                                <%  for (let i = 0; i < category.length; i++) {%>
+                                        <option id="<%=category[i]._id%>" value="<%=category[i]._id%>">
+                                            <%=category[i].name%></option>
+                                        <%}%>
+                            </select>
+                        </div>
+                
+                        <div class="form-group">
+                
+                            <label for="_subCategoryID" style="font-weight: bold;">SubCategory:</label>
+                            <select required="true" id="_subCategoryID" name="_subCategoryID" class="form-control">
+                                <option></option>
+                                
+                            </select>
+                        </div>
+                
+                        <div class="form-group">
+                
+                            <label for="_unitID" style="font-weight: bold;">Unit:</label>
+                            <select required="true" id="_unitID" name="_unitID" class="form-control">
+                                <option></option>
+                                <%  for (let i = 0; i < unit.length; i++) {%>
+                                        <option id="<%=unit[i]._id%>" value="<%=unit[i]._id%>"><%=unit[i].name%>
+                                        </option>
+                                        <%}%>
+                            </select>
+                        </div>
+                
+                        <div class="form-group">
+                
+                            <label for="_manufacturerID" style="font-weight: bold;">Manufacturer:</label>
+                            <select required="true" id="_manufacturerID" name="_manufacturerID" class="form-control">
+                                <option id="0"></option>
+                                <%  for (let i = 0; i < manufacturer.length; i++) {%>
+                                        <option id="<%=manufacturer[i]._id%>" value="<%=manufacturer[i]._id%>">
+                                            <%=manufacturer[i].name%>
+                                        </option>
+                                        <%}%>
+                            </select>
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="_madeIn" style="font-weight: bold;">Made In:</label>
+                            <input type="text" id="_madeIn" name="_madeIn" class="form-control"
+                                placeholder="Enter Made In..." required="true">
+                        </div>
+                
+                        <div class="form-group">
+                
+                            <label for="_isActive" style="font-weight: bold;">isActive:</label>
+                            <select required="true" id="_isActive" name="_isActive" class="form-control">
+                                <option id="_true" value="true">true</option>
+                                <option id="_false" value="false">false</option>
+                            </select>
+                        </div>
+                
+                
+                        <script>
+                            $(document).ready(function () {
+
+                                function getSubCategory(id) {
+                                    return (
+                                        $.ajax({
+                                            url: `api/categories/${id}/subCategories`,
+                                            type: "GET"
+                                        })
+                                    );
+                                }
+
+                                $('#_categoryID').change(function () {
+
+                                    $('#_subCategoryID').html('');
+                                    var id = $('#_categoryID').val();
+
+                                    if (id == 0) {
+                                        console.log(id)
+                                        return false
+                                    };
+
+                                    $("#loading").show();
+                                    $.when(getSubCategory(id)).done(function (result) {
+                                        console.log(result);
+
+                                        for (let i = 0; i < result.data.length; i++) {
+                                            $('#_subCategoryID').append($('<option>',
+                                                {
+                                                    id: result.data[i]._id,
+                                                    value: result.data[i]._id,
+                                                    text: result.data[i].name
+                                                }));
+
+                                        }
+                                        $("#loading").hide();
+                                    });
+                                })
+
+                            })
+                        </script>
+                
+                
+                        <div class="form-group">
+                            <img src="" id="_thumbnil" width="300dx" height="200px" />
+                        </div>
+                
+                        <div class="form-group">
+                            <input type="file" id="_file" onchange="_showMyImage(this)" class="form-control form-control-file"
+                                name="image" />
+                        </div>
+                
+                        <script>
+                            function _showMyImage(fileInput) {
+                                var files = fileInput.files;
+                                for (var i = 0; i < files.length; i++) {
+                                    var file = files[i];
+                                    var imageType = /image.*/;
+                                    if (!file.type.match(imageType)) {
+                                        continue;
+                                    }
+                                    var img = document.getElementById("_thumbnil");
+                                    img.file = file;
+                                    var reader = new FileReader();
+                                    reader.onload = (function (aImg) {
+                                        return function (e) {
+                                            aImg.src = e.target.result;
+                                        };
+                                    })(img);
+                                    reader.readAsDataURL(file);
+                                }
+                            }
+                        </script>
+                
+                        <!-- <input type="submit" class="btn btn-primary btn-user btn-block" id="btnInsert" value="insert"> -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary btn-user btn-block" id="_btnInsert">Insert</button>
+                 </div>
+            </div>
+        </div>  
+    </div>
+
+
+    <!-- script for createModal -->
+    <script>
+
+        $('.btnCreate').click(function () {
+
+            $('#createModal').modal('toggle');
+
+        });
+
+
+        //code insert
+
+        $(document).ready(function () {
+
+            $('#_btnInsert').click(function (e) {
+                console.log("da vao");
+                $("#loading").show();
+                var productName = createForm._productName.value;
+                var productOriginalPrice = createForm._productOriginalPrice.value;
+                var productSellingPrice = createForm._productSellingPrice.value;
+                var productDescription = createForm._productDescription.value;
+                var categoryID = createForm._categoryID.value;
+                var subCategoryID = createForm._subCategoryID.value;
+                var unitID = createForm._unitID.value;
+                var manufacturerID = createForm._manufacturerID.value;
+                var madeIn = createForm._madeIn.value;
+                var isActive = createForm._isActive.value;
+
+                var file_data = $('#_file').prop('files')[0];
+
+
+                if (productName.length == 0 || productOriginalPrice.length == 0 || productSellingPrice.length == 0 || categoryID.length == 0 ||
+                    subCategoryID == 0 || unitID == 0 || manufacturerID == 0 || madeIn == 0 || file_data == undefined) {
+                    alert('Ban chua dien du lieu !!');
+                    $("#loading").hide();
+                    return false;
+                }
+
+                //lấy ra kiểu file
+                var type = file_data.type;
+                //Xét kiểu file được upload
+
+                console.log(type);
+
+
+                var form = new FormData();
+
+                let img = $("#_file");
+
+                form.append("image", img[0].files[0]);
+                form.append("name", productName);
+                form.append('originalPrice', productOriginalPrice);
+                form.append('sellingPrice', productSellingPrice);
+                form.append('description', productDescription);
+                form.append('categoryID', categoryID);
+                form.append('subCategoryID', subCategoryID);
+                form.append('manufacturerID', manufacturerID);
+                form.append('unitID', unitID);
+                form.append('madeIn', madeIn);
+                form.append('isActive', isActive);
+
+
+                var match = ["image/gif", "image/png", "image/jpg", "image/jpeg"];
+                if (type == match[0] || type == match[1] || type == match[2] || type == match[3]) {
+                    //khởi tạo đối tượng form data
+
+                    //sử dụng ajax post
+                    $.ajax({
+                        url: `/api/products`, // gửi đến file upload.php 
+                        processData: false,
+                        mimeType: "multipart/form-data",
+                        contentType: false,
+                        data: form,
+                        type: 'POST',
+                    }).then((data) => {
+
+                        $('#createModal').modal('hide');
+                        $("#loading").hide();
+                        $('#messageAlert').text("Create Success!!")
+                        $('#alertModal').modal('toggle');
+
+                        $('#alertModal').on('hidden.bs.modal', function (e) {
+                            // do something...
+                            $("#loading").show();
+                            location.reload();
+                        });
+
+                    }).catch((error) => {
+                        $("#loading").hide();
+                        $('#messageAlert').text("Create Falled!!")
+                        $('#alertModal').modal('toggle');
+                        $('.btnCloseAlert').click(function () {
+                            $('#alertModal').modal('hide');
+                        });
+                        $('#alertModal').on('hidden.bs.modal', function (e) {
+                            // do something...
+                            //location.reload();
+                        });
+                    })
+                } else {
+                    alert('Chi duoc upload anh!!')
+                    $('#file').val('');
+                }
+
+                //return false;
+            });
+        });
+    </script>
+    
+
+    <!-- script for editModal -->
+    <script>
+        // script ve Edit
+        function getProduct(id) {
+            return (
+                $.ajax({
+                    url: `/api/products/${id}`,
+                    type: 'GET'
+                })
+            );
+        }
+
+
+        function getSubCategory(id) {
+            return (
+                $.ajax({
+                    url: `api/categories/${id}/subCategories`,
+                    type: "GET"
+                })
+            );
+        }
+
+
+        $('.btnEdit').click(function () {
+
+            $("#loading").show();
+            var id = $(this).prop('value');
+
+            $.when(getProduct(id)).done(function (result1) {
+
+                document.getElementById('productID').value = result1.data._id;
+                document.getElementById('productName').value = result1.data.name;
+                document.getElementById('productOriginalPrice').value = result1.data.originalPrice;
+                document.getElementById('productSellingPrice').value = result1.data.sellingPrice;
+                document.getElementById('productDescription').value = result1.data.description;
+                document.getElementById('madeIn').value = result1.data.madeIn;
+
+                document.getElementById(result1.data.categoryID).selected = true;
+                document.getElementById(result1.data.manufacturerID).selected = true;
+
+                document.getElementById(result1.data.unitID).selected = true;
+                document.getElementById(result1.data.isActive).selected = true;
+
+                $('#thumbnil').attr("src", result1.data.imageURL);
+
+                $.when(getSubCategory(result1.data.categoryID)).done(function (result) {
+
+                    console.log(result);
+                    $('#subCategoryID').html('');
+                    for (let i = 0; i < result.data.length; i++) {
+                        $('#subCategoryID').append($('<option>',
+                            {
+                                id: result.data[i]._id,
+                                value: result.data[i]._id,
+                                text: result.data[i].name
+                            }));
+
+                    }
+                    document.getElementById(result1.data.subCategoryID).selected = true;
+                });
+
+
+
+
+                $("#loading").hide();
+                $('#editModal').modal('toggle');
+
+            });
+
+
+        });
+
+
+        //script ve luc update
+        $('#btnUpdate').click(function () {
+
+            console.log("da vao");
+            $("#loading").show();
+            var id = editForm.productID.value;
+            var productName = editForm.productName.value;
+            var productOriginalPrice = editForm.productOriginalPrice.value;
+            var productSellingPrice = editForm.productSellingPrice.value;
+            var productDescription = editForm.productDescription.value;
+            var categoryID = editForm.categoryID.value;
+            var subCategoryID = editForm.subCategoryID.value;
+            var unitID = editForm.unitID.value;
+            var manufacturerID = editForm.manufacturerID.value;
+            var madeIn = editForm.madeIn.value;
+            var isActive = editForm.isActive.value;
+
+            if (productName.length == 0 || productOriginalPrice.length == 0 || productSellingPrice.length == 0 || categoryID.length == 0 ||
+                subCategoryID == 0 || unitID == 0 || manufacturerID == 0 || madeIn == 0) {
+                alert('Ban chua dien du lieu !!');
+                $("#loading").hide();
+                return false;
+            }
+
+
+            var form = new FormData();
+
+            //let img = $("#file");
+
+            //lấy ra kiểu file
+            var type;
+            var file_data = $('#file').prop('files')[0];
+            if (file_data == undefined) {
+                console.log("vo undified")
+                type = "null";
+                let img = $("#file");
+                form.append("image", '');
+
+            } else {
+                type = file_data.type;
+                //Xét kiểu file được upload
+                let img = $("#file");
+                form.append("image", img[0].files[0]);
+                console.log(type);
+
+            }
+
+
+
+
+
+            // form.append("image", img[0].files[0]);
+            form.append("name", productName);
+            form.append('originalPrice', productOriginalPrice);
+            form.append('sellingPrice', productSellingPrice);
+            form.append('description', productDescription);
+            form.append('categoryID', categoryID);
+            form.append('subCategoryID', subCategoryID);
+            form.append('manufacturerID', manufacturerID);
+            form.append('unitID', unitID);
+            form.append('madeIn', madeIn);
+            form.append('isActive', isActive);
+
+
+            var match = ["image/gif", "image/png", "image/jpg", "image/jpeg", "null"];
+            if (type == match[0] || type == match[1] || type == match[2] || type == match[3] || type == match[4]) {
+                //khởi tạo đối tượng form data
+                console.log("vo ajax")
+                //sử dụng ajax post
+                $.ajax({
+                    url: `/api/products/${id}`, // gửi đến file upload.php 
+                    processData: false,
+                    mimeType: "multipart/form-data",
+                    contentType: false,
+                    data: form,
+                    type: 'PUT',
+                }).then((data) => {
+
+                    $('#editModal').modal('hide');
+                    $("#loading").hide();
+                    $('#messageAlert').text("Create Success!!")
+                    $('#alertModal').modal('toggle');
+
+                    $('#alertModal').on('hidden.bs.modal', function (e) {
+                        // do something...
+                        $("#loading").show();
+                        location.reload();
+                    });
+
+                }).catch((error) => {
+                    $("#loading").hide();
+                    $('#messageAlert').text("Create Falled!!")
+                    $('#alertModal').modal('toggle');
+                    $('.btnCloseAlert').click(function () {
+                        $('#alertModal').modal('hide');
+                    });
+                    $('#alertModal').on('hidden.bs.modal', function (e) {
+                        // do something...
+                        //location.reload();
+                    });
+                })
+            } else {
+                alert('Chi duoc upload anh!!')
+                $('#file').val('');
+            }
+
+
+        })
+
+    </script>
+
+
+
+    <!-- gifImage loading -->
+    <div id="loading" style="display:none">
+        <img src="/images/loading01.gif" alt="Loading..." />
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/js/demo/datatables-demo.js"></script>
+
+</body>
+
+</html>
+
+<!-- 
+<div class="form-group">
+    <p style="font-weight: bold;margin-left:10px">Name:</p>
+    <input type="text" name="subCateName" pattern=".{0,30}" required="true" class="form-control" id="subCategoryName" aria-describedby="emailHelp" placeholder="Enter Name SubCategory..." style="width:90%">
+</div> -->

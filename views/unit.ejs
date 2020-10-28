@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Category</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for Loding -->
+    <link href="/stylesheets/style.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <!-- cdn for JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashbordServlet">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Store Management</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Product Management Collapse Menu -->
+            <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+                    aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Product Management</span>
+                </a>
+                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Product Management:</h6>
+                        <a class="collapse-item" href="/categories">Category</a>
+                        <a class="collapse-item" href="/subCategories">SubCategory</a>
+                        <a class="collapse-item active" href="/units">Unit</a>
+                        <a class="collapse-item" href="/manufacturers">Manufacturer</a>
+                        <a class="collapse-item" href="/products">Product</a>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+
+                                    <!-- Cho show ten current Account -->
+
+                                </span>
+                                <img class="img-profile rounded-circle"
+                                    src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="employeeServlet?action=detail">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Edit Profile
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <h1 class="h3 mb-4 text-gray-800"></h1>
+
+
+                    <!-- Page Heading -->
+                    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>-->
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+
+                            <h6 class="m-0 font-weight-bold text-primary">UNIT LIST</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <button style="width:200px;margin-bottom: 10px ;"
+                                    class="btn btn-primary btnCreate">Insert Unit</button>
+
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Unit ID</th>
+                                            <th>Unit Name</th>
+                                            <th>Modified Date</th>
+                                            <th style="width: auto">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Unit ID</th>
+                                            <th>Unit Name</th>
+                                            <th>Modified Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <% for (let i = 0; i < data.length; i++){%>
+                                        <tr>
+                                            <td><%=data[i]._id%></td>
+                                            <td><%=data[i].name%></td>
+                                            <td><%=moment(data[i].createdAt).format("YYYY-MM-DD HH:mm")%></td>
+                                            <td>
+
+                                                <button class="btn btn-danger btnDelete"
+                                                    value="<%=data[i]._id%>">Delete</a>
+                                                    <button class="btn btn-success btnEdit"
+                                                        value="<%=data[i]._id%>">Update</a>
+
+                                            </td>
+                                        </tr>
+                                        <%}%>
+                                        
+
+                                    </tbody>
+                                </table>
+
+                                <script>      
+
+                                    // $('#editModal').on('shown.bs.modal', function (e) {
+                                    //     $.ajax({
+                                    //         url: '/api/subCategories/5f79c3b118b2a661144965df',
+                                    //         type: 'GET'
+                                    //     }).then((result) => {
+                                    //         console.log("data " + result);
+
+                                    //     });
+                                    // })
+
+
+
+                                    // $(document).ready(function () {
+                                    //     $.ajax({
+                                    //         url: '/api/subCategories',
+                                    //         type: 'GET'
+                                    //     }).then((result) => {
+
+                                    //         if (result.data.length > 0) {
+                                    //             $('.odd').remove();
+                                    //         }
+                                    //         var element = '';
+                                    //         for (let i = 0; i < result.data.length; i++) {
+
+                                    //             var d = new Date(result.data[i].createdAt);
+
+                                    //             element = element + `<tr>
+                                    //                 <td>${result.data[i]._id}</td>
+                                    //                 <td>${result.data[i].name}</td>
+                                    //                 <td>${result.data[i].owner.name}</td>
+                                    //                 <td>${d.toLocaleDateString("en-US")}</td>
+                                    //                 <td>${d.toLocaleDateString("en-US")}</td>
+                                    //             </tr>`;
+                                    //         }
+                                    //         console.log(element);
+                                    //         $('#dataTable').find('tbody:last').append(element);
+                                    //     })
+                                    // });
+                                </script>
+
+                                <!-- xoa phan tu subcategories -->
+                                <script type="text/javascript">
+
+                                    // script ve Delete
+                                    $('.btnDelete').click(function () {
+
+                                        var result = confirm("If click ok will delete Unit!!");
+                                        if (result) {
+                                            var id = $(this).prop('value');
+                                            $("#loading").show();
+
+                                            $.ajax({
+                                                url: `api/units/${id}`,
+                                                type: 'DELETE'
+                                            }).then((result) => {
+
+                                                //alert(`Xoa san pham thanh cong`);
+                                                $("#loading").hide();
+                                                $('#messageAlert').text("Delete Success!!")
+                                                $('#alertModal').modal('toggle');
+                                                $('.btnCloseAlert').click(function () {
+                                                    $('#alertModal').modal('hide');
+                                                });
+                                                $('#alertModal').on('hidden.bs.modal', function (e) {
+                                                    // do something...
+                                                    $("#loading").show();
+                                                    location.reload();
+                                                })
+
+
+                                            }).catch((error) => {
+                                                //alert(`Xoa san pham thanh cong`);
+                                                $("#loading").hide();
+                                                $('#messageAlert').text(`Delete Falled!!`)
+                                                $('#alertModal').modal('toggle');
+                                                $('.btnCloseAlert').click(function () {
+                                                    $('#alertModal').modal('hide');
+                                                });
+                                                $('#alertModal').on('hidden.bs.modal', function (e) {
+                                                    // do something...
+                                                    //location.reload();
+                                                })
+                                            })
+
+
+                                        } else {
+                                            return false;
+                                        }
+                                        return true;
+                                    });
+
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>HTKK Store</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="logoutServlet?action=logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Modal -->
+    <div class="modal" id="alertModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="btnCloseAlert"  >×</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="messageAlert"></div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" class="btnCloseAlert" type="button" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade"  id="editModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">EDIT UNIT</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="btnCloseAlert"  >×</span>
+                    </button>
+                </div>
+                <div class="modal-body" class="user">
+                    <form action="" name="editForm">
+                        <input type="hidden" id ="unitID" name="unitID" class="form-control">
+
+                        <div class="form-group">
+                            <label for="categoryName" style="font-weight: bold;">Name Category:</label>
+                            <input type="text" id ="unitName" name="unitName" class="form-control" placeholder="Enter Name Unit...">
+                        </div>                       
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnUpdate" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>  
+    </div>
+
+    <!-- Create new Unit -->
+    <div class="modal fade"  id="createModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">CREATE UNIT</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="btnCloseAlert"  >×</span>
+                    </button>
+                </div>
+                <div class="modal-body" class="user">
+                    <form action="" name="createForm">
+                        
+                        <div class="form-group">
+                            <label for="_unitName" style="font-weight: bold;">Name Unit:</label>
+                            <input type="text" id ="_unitName" name="_unitName" class="form-control" placeholder="Enter Name Unit...">
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnInsert" class="btn btn-primary">Insert</button>
+                </div>
+            </div>
+        </div>  
+    </div>
+
+
+    <!-- script for createModal -->
+    <script>
+
+        $('.btnCreate').click(function () {
+
+            $('#createModal').modal('toggle');
+
+        });
+
+        //script ve luc update
+        $('#btnInsert').click(function () {
+
+            var name = createForm._unitName.value;
+            if (name.length == 0) {
+                console.log("name chua nhap")
+                return;
+            }
+
+            console.log("da vao update", name);
+
+            $("#loading").show();
+            $.ajax({
+                url: `api/units/`,
+                type: 'POST',
+                data: {
+                    "name": name,
+                }
+            }).then((result) => {
+
+                $('#createModal').modal('hide');
+                $("#loading").hide();
+                $('#messageAlert').text("Create Success!!")
+                $('#alertModal').modal('toggle');
+
+                $('#alertModal').on('hidden.bs.modal', function (e) {
+                    // do something...
+                    $("#loading").show();
+                    location.reload();
+                })
+
+            }).catch((error) => {
+                //alert(`Xoa san pham thanh cong`);
+                $("#loading").hide();
+                $('#messageAlert').text("Create Falled!!")
+                $('#alertModal').modal('toggle');
+                $('.btnCloseAlert').click(function () {
+                    $('#alertModal').modal('hide');
+                });
+                $('#alertModal').on('hidden.bs.modal', function (e) {
+                    // do something...
+                    //location.reload();
+                })
+            })
+
+        })
+
+
+
+    </script>
+    
+
+    <!-- script for editModal -->
+    <script>
+
+        // script ve Edit
+        function getUnit(id) {
+            return (
+                $.ajax({
+                    url: `/api/units/${id}`,
+                    type: 'GET'
+                })
+            );
+        }
+
+
+        $('.btnEdit').click(function () {
+
+            $("#loading").show();
+            var id = $(this).prop('value');
+
+            $.when(getUnit(id)).done(function (result1) {
+
+                document.getElementById('unitID').value = result1.data._id;
+                document.getElementById('unitName').value = result1.data.name;
+
+                $("#loading").hide();
+                $('#editModal').modal('toggle');
+
+            });
+
+
+        });
+
+
+        //script ve luc update
+        $('#btnUpdate').click(function () {
+
+            var name = editForm.unitName.value;
+            var unitID = editForm.unitID.value;
+
+           // console.log("da vao update", name, categoryID);
+
+            $("#loading").show();
+            $.ajax({
+                url: `api/units/${unitID}`,
+                type: 'PUT',
+                data: {
+                    "name": name,
+                }
+            }).then((result) => {
+
+                $('#editModal').modal('hide');
+                $("#loading").hide();
+                $('#messageAlert').text("Update Success!!")
+                $('#alertModal').modal('toggle');
+
+                $('#alertModal').on('hidden.bs.modal', function (e) {
+                    // do something...
+                    $("#loading").show();
+                    location.reload();
+                })
+
+            })
+
+        })
+
+    </script>
+
+
+
+    <!-- gifImage loading -->
+    <div id="loading" style="display:none">
+        <img src="/images/loading01.gif" alt="Loading..." />
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/js/demo/datatables-demo.js"></script>
+
+</body>
+
+</html>
+
+<!-- 
+<div class="form-group">
+    <p style="font-weight: bold;margin-left:10px">Name:</p>
+    <input type="text" name="subCateName" pattern=".{0,30}" required="true" class="form-control" id="subCategoryName" aria-describedby="emailHelp" placeholder="Enter Name SubCategory..." style="width:90%">
+</div> -->
